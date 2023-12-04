@@ -1,0 +1,10 @@
+Windows
+
+1. Install the ARM toolchain & cmake
+2. Set env vars
+    a) PLAYDATE_ARM_GCC
+    b) PLAYDATE_SDK
+    c) 
+3. Extensions: cmake tools (ms), c/c++ (ms)
+4. Source directory must exist
+5. Install Ninja in the sdk root/bin

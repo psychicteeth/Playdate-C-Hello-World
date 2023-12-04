@@ -1,0 +1,6 @@
+[
+    {
+      "name": "Playdate Device",
+      "toolchainFile": "arm.cmake"
+    }
+  ]
