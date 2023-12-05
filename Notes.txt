@@ -8,3 +8,9 @@ Windows
 3. Extensions: cmake tools (ms), c/c++ (ms)
 4. Source directory must exist
 5. Install Ninja in the sdk root/bin
+
+Mac
+
+1. Need to set PLAYDATE_ARM_GCC in .bash_profile to location of ggc-arm installed with playdate sdk
+2. Set PLAYDATE_SDK too. 
+3. Needed to add strip to makefile as xcode was default
