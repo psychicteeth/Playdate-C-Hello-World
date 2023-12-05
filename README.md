@@ -48,3 +48,8 @@ Add your environment variables to .bash_profile in your home folder. It's a text
 When you open the project folder in VS Code, cmake should configure itself and offer you a dropdown of available kits - select the Playdate Device kit (more kits, for example for the simulator, are TBD).
 
 Building should be as simple as hitting F7. I say 'should', because things often do not go to plan with building software so please let me know if there is more or different information needed in this document.
+
+## Known issues
+
+* The Mac build segfaults on my machine while running pdc to compile the Source elf into a PDX.
+* There is only one build target at the moment - Device. You won't be able to run this build on the Simulator.
