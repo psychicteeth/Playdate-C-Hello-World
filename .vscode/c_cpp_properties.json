@@ -4,7 +4,7 @@
             "name": "ARM",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${env:PLAYDATE_SDK}/C_API"
+                "${env:PLAYDATE_SDK_PATH}/C_API"
             ],
             "defines": [
                 "TARGET_EXTENSION"
