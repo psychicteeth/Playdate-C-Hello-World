@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 set(CMAKE_C_STANDARD 11)
 
 # Initial Variables
-set(SDK $ENV{PLAYDATE_SDK})
+set(SDK $ENV{PLAYDATE_SDK_PATH})
 
 # Game Name Customization
 set(PLAYDATE_GAME_NAME c_template)

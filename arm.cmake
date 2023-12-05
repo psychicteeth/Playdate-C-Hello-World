@@ -9,7 +9,7 @@ if (WIN32)
 	set(TOOLCHAIN_POSTFIX .exe)
 else()
 	MESSAGE(STATUS "configuring mac arm build")
-	MESSAGE(STATUS "sdk location: " $ENV{PLAYDATE_SDK})
+	MESSAGE(STATUS "sdk location: " $ENV{PLAYDATE_SDK_PATH})
 endif()
 set(TOOLCHAIN_DIR $ENV{PLAYDATE_ARM_GCC})
 

@@ -6,12 +6,12 @@
         {
             "label": "Deploy to Playdate",
             "type": "shell",
-            "command": "${env:PLAYDATE_SDK}/bin/pdutil install ${workspaceFolder}/${workspaceFolderBasename}.pdx"
+            "command": "${env:PLAYDATE_SDK_PATH}/bin/pdutil install ${workspaceFolder}/${workspaceFolderBasename}.pdx"
         },
         {
             "label": "Run on Playdate",
             "type": "shell",
-            "command": "${env:PLAYDATE_SDK}/bin/pdutil run /Games/${workspaceFolderBasename}.pdx",
+            "command": "${env:PLAYDATE_SDK_PATH}/bin/pdutil run /Games/${workspaceFolderBasename}.pdx",
             "dependsOn": [
                 "Deploy to Playdate"
             ],
