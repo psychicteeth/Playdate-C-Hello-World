@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Panic, Inc. All rights reserved.
 //
 
-//#include <stdio.h>
-//#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "pd_api.h"
 
