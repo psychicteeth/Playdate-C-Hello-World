@@ -1,5 +1,6 @@
 # Playdate-C-Hello-World
 Goal: An empty playdate C/Lua project that can be built to the device and to the simulator in VS Code on Windows and Mac.
+Status: Builds device binaries on Windows; build device binaries on Mac crashes with a segfault; simulator binaries can't be built
 
 ## Project setup
 
