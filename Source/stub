@@ -1,3 +1,0 @@
-Required to commit the directory to the repository. 
-If this folder does not exist, the build fails.
-Once automatic creation of this directory can be integrated into the build pipeline, this file can be removed.

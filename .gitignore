@@ -1,3 +1,8 @@
 build
 Source
 *.pdx
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+libhello_world.dylib
+Makefile
