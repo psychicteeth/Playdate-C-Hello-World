@@ -6,22 +6,18 @@ Status: Builds device binaries on Windows; build device binaries on Mac crashes 
 
 ## Project setup
 
-Setup is based on this thread: https://devforum.play.date/t/programming-with-c-on-windows-using-vscode-and-cmake/478
-
-Many many thanks to Ali for sorting this.
+# macos
 
 1. Install the Playdate SDK
     1. https://play.date/dev/
-    2. set the PLAYDATE_SDK_PATH environment variable to the installation path if it has not already been set
-1. Install the ARM toolchain
-    1. https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
-    2. set the PLAYDATE_ARM_GCC environment var to the installation path
 2. Install CMake
     1. https://cmake.org/download/
     2. Make sure cmake can be executed from a terminal/command prompt. If not, add the path to the cmake executable to your PATH environment variable.
 5. (Windows only) Install Ninja
     1. https://ninja-build.org/
     2. Again make sure this is in an accessible PATH location; the Playdate SDK bin folder is a good one.
+5. (Windows only) Install MSVC compiler toolset
+    1. https://code.visualstudio.com/docs/cpp/config-msvc
 3. Install VS Code
     1. https://code.visualstudio.com/download
     2. Extensions to install: 

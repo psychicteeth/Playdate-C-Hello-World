@@ -1,0 +1,81 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Playdate: Build simulator",
+        "type": "shell",   
+        "options":
+        {
+            "cwd": "${workspaceFolder}\\build"
+        },
+        "windows": {            
+            "command":  "cmd.exe",
+            "options":{
+              "env":{
+                "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
+              }
+            },
+            "args": [
+              "/d",
+              "/c",
+              // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+              "%__shellPath%",
+              "'&'",
+              "nmake.exe",
+            ]
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "dependsOrder": "sequence",
+        "dependsOn":["make build dir", "CMake step"]
+      },
+      {
+        "label": "make build dir",  
+        "type": "shell",      
+        "windows": {
+            "command": "cmd.exe",
+            "args":[
+              "/d",
+              "/c",
+              "build_setup.bat"
+            ]
+        }
+      },
+      {
+        "label": "CMake step",
+        "type": "shell",   
+        "options":
+        {
+            "cwd": "${workspaceFolder}\\build"
+        },
+        "windows": {            
+            "command":  "cmd.exe",
+            "options":{
+              "env":{
+                "__makefileName": "\"NMake Makefiles\"",
+                "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
+              }
+            },
+            "args": [
+              "/d",
+              "/c",
+              // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+              "%__shellPath%",
+              "'&'",
+              "cmake",
+              "-G",
+              "%__makefileName%",
+              "..",
+            ]
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+      },
+    ]
+  }
+
+  
