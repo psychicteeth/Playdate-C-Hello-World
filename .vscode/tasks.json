@@ -5,11 +5,14 @@
         "label": "Playdate: Build simulator",
         "type": "shell",  
         "command":  "make",
+        "options":{
+          "cwd": "${workspaceFolder}/build",
+        },
         "windows": {            
             "command":  "cmd.exe",
             "options":{
-              "cwd": "${workspaceFolder}\\build",
               "env":{
+                "cwd": "${workspaceFolder}\\build",
                 "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
               }
             },
@@ -32,7 +35,11 @@
       {
         "label": "make build dir",  
         "type": "shell",      
-        "command":"",
+        "command":"mkdir",
+        "args":[
+          "-p",
+          "build"
+        ],
         "windows": {
             "command": "cmd.exe",
             "args":[
@@ -45,12 +52,15 @@
       {
         "label": "CMake step",
         "type": "shell",
-        "command":  "cmake .",
+        "command":  "cmake ..",        
+        "options":{
+          "cwd": "${workspaceFolder}/build",
+        },
         "windows": {            
             "command":  "cmd.exe",
             "options":{
-              "cwd": "${workspaceFolder}\\build",
               "env":{
+                "cwd": "${workspaceFolder}\\build",
                 "__makefileName": "\"NMake Makefiles\"",
                 "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
               }
