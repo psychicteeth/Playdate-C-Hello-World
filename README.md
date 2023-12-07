@@ -71,4 +71,3 @@ Use the default build task, ctrl/cmd + shift + B. cmake build the make files, nm
 * You can only build for the simulator as yet.
 * I haven't tested lua yet.
 * I haven't worked out attaching a C debugger yet.
-* macOS build process leaves a lot of intermediate files lying around in the project root.
