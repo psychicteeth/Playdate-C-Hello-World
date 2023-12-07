@@ -2,7 +2,7 @@
 
 Goal: An empty playdate C/Lua project that can be built to the device and to the simulator in VS Code on Windows and Mac.
 
-Status: Builds simulator binaries on Windows and Mac in the sdefault build task.
+Status: Builds simulator binaries on Windows and Mac in the default build task.
 
 ## Project setup
 
