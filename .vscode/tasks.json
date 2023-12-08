@@ -1,18 +1,78 @@
 {
     "version": "2.0.0",
     "tasks": [
+
+      // Ensuring dev dirs are there
+
+      {
+        "label": "make Source dir",  
+        "type": "shell",      
+        "command":"mkdir",
+        "args":[
+          "-p",
+          "Source"
+        ],
+      },
+            
+      // Create the build-sim directory for storing makefiles etc that build the libraries for the simulator binary.
+      // We need the fodler to be present or things go wrong later.
+      {
+        "label": "make build-sim dir",  
+        "type": "shell",      
+        "command":"mkdir",
+        "args":[
+          "-p",
+          "build-sim"
+        ],
+        // windows mkdir still errors on an existing folder, so we need to do an if, and powershell seems to hate it
+        "windows": {
+            "command": "cmd.exe",
+            "args":[
+              "/d",
+              "/c",
+              "build-sim-setup.bat"
+            ]
+        }
+      },
+
+      // Create the build-sim and Source directory for storing makefiles etc that build the libraries for the simulator binary.
+      {
+        "label": "make build-dev dir",  
+        "type": "shell",      
+        "command":"mkdir",
+        "args":[
+          "-p",
+          "build-dev"
+        ],
+        "windows": {
+            "command": "cmd.exe",
+            "args":[
+              "/d",
+              "/c",
+              "build-dev-setup.bat"
+            ]
+        }
+      },
+
+      ///
+      ///
+      ///
+      ///   BUILDING FOR THE SIMULATOR
+      ///
+      ///
+
       {
         "label": "Playdate: Build simulator",
         "type": "shell",  
         "command":  "make",
         "options":{
-          "cwd": "${workspaceFolder}/build",
+          "cwd": "${workspaceFolder}/build-sim",
         },
         "windows": {            
             "command":  "cmd.exe",
             "options":{
               "env":{
-                "cwd": "${workspaceFolder}\\build",
+                "cwd": "${workspaceFolder}\\build-sim",
                 "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
               }
             },
@@ -23,44 +83,110 @@
               "%__shellPath%",
               "'&'",
               "nmake.exe",
-            ]
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn":["make build-sim dir", "CMake-sim step"]
         },
         "group": {
           "kind": "build",
           "isDefault": true
         },
         "dependsOrder": "sequence",
-        "dependsOn":["make build dir", "CMake step"]
+        "dependsOn":["make Source dir", "make build-sim dir", "CMake-sim step"]
       },
+
+      // Create makefiles to build the simulator binary
       {
-        "label": "make build dir",  
-        "type": "shell",      
-        "command":"mkdir",
-        "args":[
-          "-p",
-          "build"
-        ],
-        "windows": {
-            "command": "cmd.exe",
-            "args":[
-              "/d",
-              "/c",
-              "build_setup.bat"
-            ]
-        }
-      },
-      {
-        "label": "CMake step",
+        "label": "CMake-sim step",
         "type": "shell",
         "command":  "cmake ..",        
         "options":{
-          "cwd": "${workspaceFolder}/build",
+          "cwd": "${workspaceFolder}/build-sim",
         },
         "windows": {            
             "command":  "cmd.exe",
             "options":{
               "env":{
-                "cwd": "${workspaceFolder}\\build",
+                "cwd": "${workspaceFolder}\\build-sim",
+                "__makefileName": "\"NMake Makefiles\"",
+                "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
+              }
+            },
+            "args": [
+              "/d",
+              "/c",
+              // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+              "%__shellPath%",
+              "'&'",
+              "cmake",
+              "-G",
+              "%__makefileName%",
+              "..",
+            ]
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+      },
+
+      ///
+      ///
+      ///   BUILDING FOR THE DEVICE
+      ///
+      ///
+
+      {
+        "label": "Playdate: Build device",
+        "type": "shell",  
+        "command":  "make",
+        "options":{
+          "cwd": "${workspaceFolder}/build-dev",
+        },
+        "windows": {            
+            "command":  "cmd.exe",
+            "options":{
+              "env":{
+                "cwd": "${workspaceFolder}\\build-dev",
+                "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
+              }
+            },
+            "args": [
+              "/d",
+              "/c",
+              // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+              "%__shellPath%",
+              "'&'",
+              "nmake.exe",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn":["make build-dev dir", "CMake-dev step"]
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "dependsOrder": "sequence",
+        "dependsOn":["make Source dir", "make build-dev dir", "CMake-dev step"]
+      },
+
+      // Create makefiles to build the simulator binary
+      {
+        "label": "CMake-dev step",
+        "type": "shell",
+        "command":  "cmake",
+        "args":[
+          "-DCMAKE_TOOLCHAIN_FILE=${env:PLAYDATE_SDK_PATH}/C_API/buildsupport/arm.cmake",
+          "..",        
+        ], 
+        "options":{
+          "cwd": "${workspaceFolder}/build-dev",
+        },
+        "windows": {            
+            "command":  "cmd.exe",
+            "options":{
+              "env":{
+                "cwd": "${workspaceFolder}\\build-dev",
                 "__makefileName": "\"NMake Makefiles\"",
                 "__shellPath": "\"${env:VISUAL_STUDIO_TOOLS}\\vcvars64.bat\""
               }
