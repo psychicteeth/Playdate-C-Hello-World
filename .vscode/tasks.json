@@ -25,7 +25,7 @@
       {
         "label": "make build-sim dir",  
         "type": "shell",      
-        "command":"echo",
+        "command":"mkdir",
         "args":[
           "-p",
           "build-sim"
