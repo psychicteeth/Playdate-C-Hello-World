@@ -12,6 +12,12 @@
           "-p",
           "Source"
         ],
+        "windows": {
+          "command": "echo",
+          "args":[
+            "."
+          ]
+      }
       },
             
       // Create the build-sim directory for storing makefiles etc that build the libraries for the simulator binary.
@@ -19,7 +25,7 @@
       {
         "label": "make build-sim dir",  
         "type": "shell",      
-        "command":"mkdir",
+        "command":"echo",
         "args":[
           "-p",
           "build-sim"
@@ -80,9 +86,9 @@
               "/d",
               "/c",
               // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
-              "%__shellPath%",
-              "'&'",
-              "nmake.exe",
+              "\"%__shellPath%",
+              "^'&'",
+			  "nmake.exe\"",
             ],
             "dependsOrder": "sequence",
             "dependsOn":["make build-sim dir", "CMake-sim step"]
@@ -116,12 +122,14 @@
               "/d",
               "/c",
               // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
-              "%__shellPath%",
-              "'&'",
-              "cmake",
+			  "\"%__shellPath%",
+			  "^'&'", 	
+			  "cmake",
               "-G",
               "%__makefileName%",
-              "..",
+              "..\"", 
+              
+              
             ]
         },
         "group": {
@@ -155,9 +163,9 @@
               "/d",
               "/c",
               // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
-              "%__shellPath%",
-              "'&'",
-              "nmake.exe",
+              "\"%__shellPath%",
+              "^'&'",
+              "nmake.exe\"",
             ],
             "dependsOrder": "sequence",
             "dependsOn":["make build-dev dir", "CMake-dev step"]
@@ -195,12 +203,13 @@
               "/d",
               "/c",
               // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
-              "%__shellPath%",
-              "'&'",
+              "\"%__shellPath%",
+              "^'&'",
               "cmake",
               "-G",
               "%__makefileName%",
               "..",
+              "--toolchain=${env:PLAYDATE_SDK_PATH}/C_API/buildsupport/arm.cmake\"",
             ]
         },
         "group": {
