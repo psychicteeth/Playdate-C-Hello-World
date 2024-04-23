@@ -41,7 +41,7 @@ The build tasks simply execute the command line instructions from [Inside Playda
         4. Playdate debug (midouest)    
         5. You do NOT need to install the cmake tools / cmake extensions to build playdate software with this repo.
 1. We need nmake. If you do not have a version of Visual Studio (not Code) installed, you will need to install the MSVC compiler toolset:
-    [1. https://code.visualstudio.com/docs/cpp/config-msvc](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
+    1. https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022
 2. Set the VISUAL_STUDIO_TOOLS environment variable to the path to vcvars64.bat. One way to find this is detailed below:
     1. You can find the location of it by going to the start menu, typing "x64 Native" and seeing what comes up.
     2. Right click on it and Open File Location.
